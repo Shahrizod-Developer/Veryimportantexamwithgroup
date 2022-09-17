@@ -9,5 +9,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //commit from Bekzod
+    // commit from Ixtiyorjon
     }
 }
