@@ -13,7 +13,6 @@ import uz.gita.veryimportantexamwithgroup.domain.repositories.StoreRepository
 import javax.inject.Inject
 
 class StoreRepositoryImpl @Inject constructor(private val db: CollectionReference) : StoreRepository {
-//    private val db = Firebase.firestore
 
     override fun getAllStores(): LiveData<Result<List<StoreData>>> {
         val liveData = MutableLiveData<Result<List<StoreData>>>()
@@ -41,7 +40,6 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
 
     override fun addStore(storeData: StoreData): LiveData<Result<Unit>> {
         val liveData = MutableLiveData<Result<Unit>>()
-//        Log.d("TTT", "placingOrder1")
         db.document(storeData.id).set(storeData)
             .addOnCompleteListener {
                 Log.d("TTT", "addOnCompleteListener")
@@ -54,7 +52,6 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
                 Log.d("TTT", "addOnFailureListener")
                 liveData.value = Result.failure(it)
             }
-//        Log.d("TTT", "placingOrder2")
         return liveData
     }
 
