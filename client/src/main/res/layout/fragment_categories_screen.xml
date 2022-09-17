@@ -6,26 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.screens.CategoriesScreen">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tool"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guideline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:text="Online Shopping"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.SearchView
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/guideline"
         android:id="@+id/search"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,8 +21,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:padding="5dp"
+        android:orientation="vertical"
+        app:spanCount="2"
         tools:listitem="@layout/item_category"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
