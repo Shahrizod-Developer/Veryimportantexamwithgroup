@@ -1,15 +1,13 @@
-package uz.gita.veryimportantexamwithgroup.ui.add.viewmodel
+package uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 
 
-interface AddViewModel {
+interface EditViewModel {
     val messageLiveData: LiveData<String>
     val isResume: Flow<Boolean>
 
-    fun addStore(storeData: StoreData)
-
-    fun add()
+    fun updateStore(storeData: StoreData)
 }

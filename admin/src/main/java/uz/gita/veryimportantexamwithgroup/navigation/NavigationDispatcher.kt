@@ -15,4 +15,8 @@ class NavigationDispatcher @Inject constructor() : NavigationHandler, Navigator 
     override suspend fun navigateTo(direction: Direction) = navigator {
         navigate(direction)
     }
+
+    override suspend fun navigateUp() = navigator{
+        navigateUp()
+    }
 }

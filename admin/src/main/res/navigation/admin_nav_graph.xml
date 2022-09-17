@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/admin_nav_graph">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/loginScreen">
+    <fragment
+        tools:layout="@layout/screen_login"
+        android:id="@+id/loginScreen"
+        android:name="uz.gita.veryimportantexamwithgroup.ui.login.LoginScreen"
+        android:label="LoginScreen" >
+        <action
+            android:id="@+id/action_loginScreen_to_mainScreen"
+            app:destination="@id/mainScreen" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/screen_main"
+        android:id="@+id/mainScreen"
+        android:name="uz.gita.veryimportantexamwithgroup.ui.main.MainScreen"
+        android:label="MainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_addScreen"
+            app:destination="@id/addScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_editScreen"
+            app:destination="@id/editScreen" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/screen_add"
+        android:id="@+id/addScreen"
+        android:name="uz.gita.veryimportantexamwithgroup.ui.add.AddScreen"
+        android:label="AddScreen" />
+    <fragment
+        tools:layout="@layout/screen_edit"
+        android:id="@+id/editScreen"
+        android:name="uz.gita.veryimportantexamwithgroup.ui.edit.EditScreen"
+        android:label="EditScreen" >
+        <argument
+            android:name="data"
+            app:argType="uz.gita.veryimportantexamwithgroup.data.models.StoreData" />
+    </fragment>
 </navigation>

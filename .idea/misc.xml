@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/drawable/ic_add_store.xml" value="0.1415" />
         <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/drawable/shape_btn.xml" value="0.1385" />
         <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/drawable/shape_edit_text.xml" value="0.1385" />
+        <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/drawable/shape_rv_item.xml" value="0.1415" />
         <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/list_item.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/screen_add.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/screen_edit.xml" value="0.16" />
+        <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/screen_login.xml" value="0.15" />
+        <entry key="..\:/AndroidStudioProjects/Veryimportantexamwithgroup/admin/src/main/res/layout/screen_main.xml" value="0.18" />
       </map>
     </option>
   </component>

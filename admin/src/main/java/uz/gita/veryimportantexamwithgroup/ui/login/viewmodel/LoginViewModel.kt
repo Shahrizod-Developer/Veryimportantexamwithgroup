@@ -1,15 +1,13 @@
-package uz.gita.veryimportantexamwithgroup.ui.add.viewmodel
+package uz.gita.veryimportantexamwithgroup.ui.login.viewmodel
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 
 
-interface AddViewModel {
+interface LoginViewModel {
     val messageLiveData: LiveData<String>
     val isResume: Flow<Boolean>
 
-    fun addStore(storeData: StoreData)
-
-    fun add()
+    fun signIn(login: String, password: String)
 }
