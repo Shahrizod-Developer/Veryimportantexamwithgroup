@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Very important  exam with group</string>
+    <string name="add_store">Add Store</string>
+    <string name="name">Name</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="edit_store">Edit store</string>
 </resources>

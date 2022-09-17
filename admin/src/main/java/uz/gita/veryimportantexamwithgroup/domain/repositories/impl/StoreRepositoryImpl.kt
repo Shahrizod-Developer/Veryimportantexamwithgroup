@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import uz.gita.veryimportantexamwithgroup.Mapper
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.domain.repositories.StoreRepository
@@ -38,51 +40,51 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
         return liveData
     }
 
-    override fun addStore(storeData: StoreData): LiveData<Result<Unit>> {
-        val liveData = MutableLiveData<Result<Unit>>()
+    override fun addStore(storeData: StoreData): Flow<String> = flow {
+        var message = ""
         db.document(storeData.id).set(storeData)
             .addOnCompleteListener {
-                Log.d("TTT", "addOnCompleteListener")
+                message = "Add complete"
             }
             .addOnSuccessListener {
                 Log.d("TTT", "addOnSuccessListener")
-                liveData.value = Result.success(Unit)
+                message = "Add success"
             }
             .addOnFailureListener {
                 Log.d("TTT", "addOnFailureListener")
-                liveData.value = Result.failure(it)
+                message = "Add failure"
             }
-        return liveData
+        emit(message)
     }
 
-    override fun updateStore(storeData: StoreData): LiveData<String> {
-        val liveData = MutableLiveData<String>()
+    override fun updateStore(storeData: StoreData): Flow<String> = flow {
+        var message = ""
         val docReference: DocumentReference = db.document(storeData.id)
         docReference.update(
             "name", storeData.name,
             "login", storeData.login,
             "password", storeData.password
         ).addOnCompleteListener {
-            if (it.isSuccessful) {
-                liveData.value = "Update Store"
+            message = if (it.isSuccessful) {
+                "Update Store"
             } else {
-                liveData.value = "Failed"
+                "Failed"
             }
         }
-        return liveData
+        emit(message)
     }
 
-    override fun deleteStore(storeData: StoreData): LiveData<String> {
-        val liveData = MutableLiveData<String>()
+    override fun deleteStore(storeData: StoreData): Flow<String> = flow {
+        var message = ""
         val docReference: DocumentReference = db.document(storeData.id)
         docReference.delete().addOnCompleteListener {
             if (it.isSuccessful) {
-                liveData.value = "Delete Store"
+                message = "Delete Store"
             } else {
-                liveData.value = "Failed"
+                message = "Failed"
             }
         }
-        return liveData
+        emit(message)
     }
 }
 
