@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -14,6 +15,7 @@ import uz.gita.veryimportantexamwithgroup.ui.main.MainScreenDirections
 import uz.gita.veryimportantexamwithgroup.ui.main.viewmodel.MainViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) :
     ViewModel(), MainViewModel {
     override val messageLiveData: MutableLiveData<String> = MutableLiveData()

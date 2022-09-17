@@ -3,6 +3,7 @@ package uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.impl
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -13,6 +14,7 @@ import uz.gita.veryimportantexamwithgroup.navigation.Navigator
 import uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.AddViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) :
     ViewModel(), AddViewModel {
     override val messageLiveData: MutableLiveData<String> = MutableLiveData()

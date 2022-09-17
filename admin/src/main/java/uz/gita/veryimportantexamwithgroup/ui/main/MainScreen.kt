@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tapadoo.alerter.Alerter
+import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.veryimportantexamwithgroup.R
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenLoginBinding
@@ -18,6 +19,7 @@ import uz.gita.veryimportantexamwithgroup.ui.main.adapter.StoresAdapter
 import uz.gita.veryimportantexamwithgroup.ui.main.viewmodel.MainViewModel
 import uz.gita.veryimportantexamwithgroup.ui.main.viewmodel.impl.MainViewModelImpl
 
+@AndroidEntryPoint
 class MainScreen : Fragment(R.layout.screen_main) {
     private val viewModel: MainViewModel by viewModels<MainViewModelImpl>()
     private val viewBinding: ScreenMainBinding by viewBinding(ScreenMainBinding::bind)

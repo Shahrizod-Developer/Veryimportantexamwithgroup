@@ -7,12 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tapadoo.alerter.Alerter
+import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.veryimportantexamwithgroup.R
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenEditBinding
 import uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel.EditViewModel
 import uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel.impl.EditViewModelImpl
 
+@AndroidEntryPoint
 class EditScreen : Fragment(R.layout.screen_edit) {
     private val viewModel: EditViewModel by viewModels<EditViewModelImpl>()
     private val viewBinding: ScreenEditBinding by viewBinding(ScreenEditBinding::bind)
