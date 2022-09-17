@@ -3,33 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/drawable/product_filter_button_bg.xml" value="0.287" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/drawable/product_to_cart_bg.xml" value="0.287" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/activity_main.xml" value="0.2975630611372381" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/fragment_categories_screen.xml" value="0.2975630611372381" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/fragment_product_screen.xml" value="0.5" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/item_category.xml" value="0.2975630611372381" />
-        <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/product_item.xml" value="0.5" />
-        <entry key="..\:/Users/99897/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/drawable/ic_outline_person_24.xml" value="0.1305" />
-        <entry key="..\:/Users/99897/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/screen_sign_in.xml" value="0.15" />
-        <entry key="..\:/Users/99897/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/screen_sign_up.xml" value="0.2" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/fragment_categories_screen.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/fragment_product_screen.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/item_category.xml" value="0.203125" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/item_inner_category.xml" value="0.203125" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/item_outer_category.xml" value="0.203125" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/product_item.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/client/src/main/res/layout/screen_cart.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/store/src/main/res/layout/fragment_category_screen.xml" value="0.203125" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/store/src/main/res/layout/item_category.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/store/src/main/res/layout/list_item_orders.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ulug'bek/AndroidStudioProjects/Veryimportantexamwithgroup/store/src/main/res/layout/screen_addcategory.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/fragment_product_screen.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/item.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/item_category.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/product_item.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/screen_cart.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/screen_product_cart.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/client/src/main/res/layout/screen_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/store/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1595" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/store/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup1/store/src/main/res/layout/fragment_category_screen.xml" value="0.25" />

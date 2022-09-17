@@ -9,10 +9,23 @@
         tools:layout="@layout/fragment_category_screen"
         android:id="@+id/categoryScreen"
         android:name="uz.gita.store.screens.CategoryScreen"
-        android:label="CategoryScreen" />
+        android:label="CategoryScreen" >
+        <action
+            android:id="@+id/action_categoryScreen_to_addCategoryScreen"
+            app:destination="@id/addCategoryScreen" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="uz.gita.store.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        tools:layout="@layout/screen_addcategory"
+        android:id="@+id/addCategoryScreen"
+        android:name="uz.gita.store.screens.AddCategoryScreen"
+        android:label="AddCategoryScreen" >
+        <action
+            android:id="@+id/action_addCategoryScreen_to_categoryScreen"
+            app:destination="@id/categoryScreen" />
+    </fragment>
 </navigation>
