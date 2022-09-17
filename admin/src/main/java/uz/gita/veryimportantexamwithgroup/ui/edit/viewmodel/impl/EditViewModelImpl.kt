@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.domain.usecases.StoreUseCase
 import uz.gita.veryimportantexamwithgroup.navigation.Navigator
@@ -24,6 +25,10 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
                     messageLiveData.value = it
                 }.launchIn(viewModelScope)
         }
+    }
+
+    override fun navigateUp() {
+        viewModelScope.launch { navigator.navigateUp() }
     }
 
     private fun checkStore(storeData: StoreData): Boolean {

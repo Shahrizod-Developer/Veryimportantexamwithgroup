@@ -32,6 +32,7 @@ class AddScreen : Fragment(R.layout.screen_add) {
                 password = viewBinding.password.text.toString()
             )
             viewModel.addStore(storeData)
+            viewModel.add()
         }
     }
 

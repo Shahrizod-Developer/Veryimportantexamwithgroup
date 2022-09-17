@@ -10,4 +10,6 @@ interface EditViewModel {
     val isResume: Flow<Boolean>
 
     fun updateStore(storeData: StoreData)
+
+    fun navigateUp()
 }

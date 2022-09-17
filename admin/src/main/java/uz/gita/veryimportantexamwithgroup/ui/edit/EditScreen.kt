@@ -37,6 +37,7 @@ class EditScreen : Fragment(R.layout.screen_edit) {
                 password = viewBinding.password.text.toString()
             )
             viewModel.updateStore(storeData)
+            viewModel.navigateUp()
         }
     }
 
