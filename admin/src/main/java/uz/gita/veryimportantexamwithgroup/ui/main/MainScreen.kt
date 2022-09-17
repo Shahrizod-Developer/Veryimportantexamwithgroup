@@ -6,9 +6,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import ru.ldralighieri.corbind.view.clicks
 import uz.gita.veryimportantexamwithgroup.R
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenLoginBinding
@@ -33,10 +39,10 @@ class MainScreen : Fragment(R.layout.screen_main) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewBinding.addStore.setOnClickListener {
-            viewModel.openAdd()
-        }
-        adapter.setItemEditListener { viewModel.openEdit(it) }
+        viewBinding.addStore.clicks()
+            .onEach { viewModel.openAdd() }
+            .launchIn(lifecycleScope)
+        adapter.setItemEditListener { result -> flowOf(1).onEach { viewModel.openEdit(result) }.launchIn(lifecycleScope) }
         adapter.setItemDeleteListener { viewModel.deleteStore(it) }
     }
 

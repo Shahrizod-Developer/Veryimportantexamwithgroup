@@ -1,5 +1,6 @@
 package uz.gita.veryimportantexamwithgroup.ui.login.viewmodel.impl
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class LoginViewModelImpl @Inject constructor(private val navigator: Navigator) : ViewModel(), LoginViewModel {
     override val messageLiveData: MutableLiveData<String> = MutableLiveData()
     override val isResume = MutableStateFlow(false)
+
     override fun signIn(login: String, password: String) {
         if (login.trim().isEmpty() && password.trim().isEmpty()) {
             messageLiveData.value = "Fill in all fields"

@@ -25,6 +25,7 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
             useCase.updateStore(storeData)
                 .onEach {
                     messageLiveData.value = it
+                    navigateUp()
                 }.launchIn(viewModelScope)
         }
     }

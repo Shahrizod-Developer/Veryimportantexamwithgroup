@@ -25,6 +25,7 @@ class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, pr
             useCase.addStore(storeData)
                 .onEach {
                     messageLiveData.value = it
+                    add()
                 }.launchIn(viewModelScope)
         }
     }
