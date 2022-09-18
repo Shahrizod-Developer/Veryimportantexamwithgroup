@@ -5,6 +5,15 @@
       <map>
         <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/fragment_product_screen.xml" value="0.358695652173913" />
         <entry key="..\:/Memory/Android Develop/Veryimportantexamwithgroup/client/src/main/res/layout/product_item.xml" value="0.5" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/client/src/main/res/layout/item_description.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/client/src/main/res/layout/item_order.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/fragment_category_screen.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/item_category.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/item_category_img.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/list_item_orders.xml" value="0.25" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/screen_addcategory.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/ixtiy/AndroidStudioProjects/Veryimportantexamwithgroup3/store/src/main/res/layout/screen_orders.xml" value="0.25" />
         <entry key="client/src/main/res/layout/activity_main.xml" value="0.30344202898550726" />
         <entry key="client/src/main/res/layout/fragment_categories_screen.xml" value="0.30344202898550726" />
         <entry key="client/src/main/res/layout/fragment_product_screen.xml" value="0.30344202898550726" />

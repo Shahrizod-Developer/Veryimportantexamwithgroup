@@ -1,4 +1,4 @@
-package uz.gita.store.screens
+package uz.gita.store.screens.addcategoryscreen
 
 import androidx.fragment.app.Fragment
 import uz.gita.store.R
