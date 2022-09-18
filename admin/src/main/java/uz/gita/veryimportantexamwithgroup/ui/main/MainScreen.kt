@@ -3,6 +3,8 @@ package uz.gita.veryimportantexamwithgroup.ui.main
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -34,13 +36,13 @@ class MainScreen : Fragment(R.layout.screen_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.messageLiveData.observe(this, messageObserver)
         viewModel.getData.observe(this, getObserver)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.listStore.adapter = adapter
+
         viewBinding.addStore.clicks()
             .onEach { viewModel.openAdd() }
             .launchIn(lifecycleScope)

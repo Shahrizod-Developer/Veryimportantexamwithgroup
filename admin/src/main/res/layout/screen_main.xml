@@ -38,5 +38,4 @@
         app:layout_constraintTop_toTopOf="@id/text"
         app:srcCompat="@drawable/ic_add_store" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

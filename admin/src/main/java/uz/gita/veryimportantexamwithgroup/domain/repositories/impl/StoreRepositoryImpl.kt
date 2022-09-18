@@ -71,13 +71,13 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
             "login", storeData.login,
             "password", storeData.password
         ).addOnCompleteListener {
-            messageLiveData.postValue("Add complete")
+            messageLiveData.postValue("Edit complete")
         }
             .addOnSuccessListener {
-                messageLiveData.postValue("Add success")
+                messageLiveData.postValue("Edit success")
             }
             .addOnFailureListener {
-                messageLiveData.postValue("Add failure")
+                messageLiveData.postValue("Edit failure")
             }
         return messageLiveData
     }
