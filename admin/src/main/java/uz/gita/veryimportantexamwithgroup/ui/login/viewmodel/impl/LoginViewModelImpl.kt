@@ -24,12 +24,12 @@ class LoginViewModelImpl @Inject constructor(private val navigator: Navigator) :
 
     override fun signIn(login: String, password: String) {
         if (login.trim().isEmpty() || password.trim().isEmpty()) {
-            messageLiveData.value = "Fill in all fields"
+            messageLiveData.value = "Barcha maydonlarni to'ldiring!"
         } else {
             if (login == "admin" && password == "12345") {
                 viewModelScope.launch { navigator.navigateTo(LoginScreenDirections.actionLoginScreenToMainScreen()) }
             } else {
-                messageLiveData.value = "Incorrect login or password. Please check and re-enter"
+                messageLiveData.value = "Login yoki parol xato. Tekshirib qaytadan kiriting!"
             }
         }
     }

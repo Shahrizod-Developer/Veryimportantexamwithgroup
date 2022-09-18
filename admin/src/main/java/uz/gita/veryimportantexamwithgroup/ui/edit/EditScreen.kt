@@ -52,7 +52,6 @@ class EditScreen : Fragment(R.layout.screen_edit) {
 
     private val messageObserver = Observer<String> {
         Alerter.create(requireActivity())
-            .setTitle("Message")
             .setText(it)
             .setBackgroundColorRes(R.color.green_color)
             .show()
