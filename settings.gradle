@@ -15,7 +15,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Very important  exam with group"
 include ':admin'
-include ':core'
-include ':client'
-include ':store'
-include ':core_data'
