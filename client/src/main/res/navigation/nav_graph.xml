@@ -9,5 +9,14 @@
         android:id="@+id/categoriesScreen"
         android:name="uz.gita.client.presentation.ui.screens.CategoriesScreen"
         android:label="fragment_categories_screen"
-        tools:layout="@layout/fragment_categories_screen" />
+        tools:layout="@layout/fragment_categories_screen" >
+        <action
+            android:id="@+id/action_categoriesScreen_to_productScreen"
+            app:destination="@id/productScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/productScreen"
+        android:name="uz.gita.client.presentation.ui.screens.ProductScreen"
+        android:label="fragment_product_screen"
+        tools:layout="@layout/fragment_product_screen" />
 </navigation>

@@ -1,5 +1,7 @@
 package uz.gita.core_data.data.local
 
+import java.io.Serializable
+
 // Created by Jamshid Isoqov an 9/17/2022
 data class ProductData(
     val id: String,
@@ -9,4 +11,4 @@ data class ProductData(
     val photos: List<String>,
     val sell: String,
     val attrs: List<Pair<String, String>>
-)
+): Serializable
