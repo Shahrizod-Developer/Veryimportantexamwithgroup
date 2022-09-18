@@ -1,5 +1,8 @@
 package uz.gita.veryimportantexamwithgroup.ui.main
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.ldralighieri.corbind.view.clicks
 import uz.gita.veryimportantexamwithgroup.R
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
+import uz.gita.veryimportantexamwithgroup.databinding.ScreenDialogBinding
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenLoginBinding
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenMainBinding
 import uz.gita.veryimportantexamwithgroup.ui.login.viewmodel.LoginViewModel
@@ -47,12 +51,30 @@ class MainScreen : Fragment(R.layout.screen_main) {
             .onEach { viewModel.openAdd() }
             .launchIn(lifecycleScope)
         adapter.setItemEditListener { result -> flowOf(1).onEach { viewModel.openEdit(result) }.launchIn(lifecycleScope) }
-        adapter.setItemDeleteListener { viewModel.deleteStore(it) }
+        adapter.setItemDeleteListener { store ->
+            val builder = AlertDialog.Builder(requireContext())
+            val binding = ScreenDialogBinding.inflate(layoutInflater)
+            builder.setView(binding.root)
+            builder.setCancelable(false)
+            val alertDialog = builder.create()
+            alertDialog.window!!.setBackgroundDrawable(
+                ColorDrawable(
+                    Color.TRANSPARENT
+                )
+            )
+            binding.btnYes.setOnClickListener {
+                viewModel.deleteStore(store)
+                alertDialog.dismiss()
+            }
+            binding.btnNo.setOnClickListener {
+                alertDialog.dismiss()
+            }
+            alertDialog.show()
+        }
     }
 
     private val messageObserver = Observer<String> {
         Alerter.create(requireActivity())
-            .setTitle("Message")
             .setText(it)
             .setBackgroundColorRes(R.color.green_color)
             .show()
@@ -61,7 +83,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
     private val getObserver = Observer<Result<List<StoreData>>> { result ->
         when {
             result.isFailure -> {
-                viewModel.failurMessage("There was an error downloading, please check your internet connection and try again")
+                viewModel.failurMessage("Yuklashda xatolik yuz berdi. Qurilma internetga ulanganligini tekshiring!")
             }
             result.isSuccess -> {
                 adapter.submitList(result.getOrNull())

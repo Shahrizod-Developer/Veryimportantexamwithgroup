@@ -53,13 +53,13 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
         val messageLiveData = MutableLiveData<String>()
         db.document(storeData.id).set(storeData)
             .addOnCompleteListener {
-                messageLiveData.postValue("Add complete")
+                messageLiveData.postValue("Do'kon qo'shilmoqda")
             }
             .addOnSuccessListener {
-                messageLiveData.postValue("Add success")
+                messageLiveData.postValue("Do'kon ma'lumotlari qo'shildi")
             }
             .addOnFailureListener {
-                messageLiveData.postValue("Add failure")
+                messageLiveData.postValue("Qo'shishda xatolik yuz berdi")
             }
         return messageLiveData
     }
@@ -71,13 +71,13 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
             "login", storeData.login,
             "password", storeData.password
         ).addOnCompleteListener {
-            messageLiveData.postValue("Edit complete")
+            messageLiveData.postValue("Do'kon o'zgartirilmoqda")
         }
             .addOnSuccessListener {
-                messageLiveData.postValue("Edit success")
+                messageLiveData.postValue("Do'kon ma'lumotlari o'zgartirildi")
             }
             .addOnFailureListener {
-                messageLiveData.postValue("Edit failure")
+                messageLiveData.postValue("O'zgartirishda xatolik yuz berdi!")
             }
         return messageLiveData
     }
@@ -85,13 +85,13 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
     override fun deleteStore(storeData: StoreData): LiveData<String> {
         val messageLiveData = MutableLiveData<String>()
         db.document(storeData.id).delete().addOnCompleteListener {
-            messageLiveData.postValue("Delete complete")
+            messageLiveData.postValue("Do'kon o'chirilmoqda")
         }
             .addOnSuccessListener {
-                messageLiveData.postValue("Delete success")
+                messageLiveData.postValue("Do'kon ma'lumotlari o'chirildi")
             }
             .addOnFailureListener {
-                messageLiveData.postValue("Delete failure")
+                messageLiveData.postValue("O'chirishda xatolik yuz berdi!")
             }
         return messageLiveData
     }

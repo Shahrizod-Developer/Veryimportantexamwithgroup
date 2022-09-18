@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Very important  exam with group</string>
-    <string name="add_store">Add Store</string>
-    <string name="name">Name</string>
+    <string name="app_name">Admin - Online shop</string>
+    <string name="add_store">Do\'kon qo\'shish</string>
+    <string name="name">Nomi</string>
     <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="edit_store">Edit store</string>
-    <string name="sign_in">Sign In</string>
-    <string name="store_list">Store list</string>
+    <string name="password">Parol</string>
+    <string name="edit_store">O\'zgartirish</string>
+    <string name="sign_in">Kirish</string>
+    <string name="store_list">Do\'konlar ro\'yhati</string>
 </resources>
