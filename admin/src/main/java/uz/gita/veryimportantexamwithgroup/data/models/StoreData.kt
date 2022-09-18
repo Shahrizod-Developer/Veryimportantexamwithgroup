@@ -4,7 +4,7 @@ import java.io.Serializable
 import java.util.*
 
 data class StoreData(
-    val id: String = UUID.randomUUID().toString(),
+    val id: String,
     val name: String,
     val login: String,
     val password: String

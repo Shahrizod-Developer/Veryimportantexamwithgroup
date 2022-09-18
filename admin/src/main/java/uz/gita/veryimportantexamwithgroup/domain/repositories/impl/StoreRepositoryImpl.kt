@@ -7,8 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import uz.gita.veryimportantexamwithgroup.Mapper
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.domain.repositories.StoreRepository
@@ -16,75 +19,81 @@ import javax.inject.Inject
 
 class StoreRepositoryImpl @Inject constructor(private val db: CollectionReference) : StoreRepository {
 
+    private val coroutine = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
+
     override fun getAllStores(): LiveData<Result<List<StoreData>>> {
         val liveData = MutableLiveData<Result<List<StoreData>>>()
 
-        db.get()
-            .addOnSuccessListener {
-                val ls = it.documents.map { item -> Mapper.run { item.tostore() } }
-                liveData.value = Result.success(ls)
-            }
-            .addOnFailureListener { liveData.value = Result.failure(it) }
+        coroutine.launch(Dispatchers.IO) {
+            db.get()
+                .addOnSuccessListener {
+                    val ls = it.documents.map { item -> Mapper.run { item.tostore() } }
+                    liveData.postValue(Result.success(ls))
+                }
+                .addOnFailureListener { liveData.postValue(Result.failure(it)) }
+        }
 
         return liveData
     }
 
     override fun getAllStores2(): LiveData<Result<List<StoreData>>> {
         val liveData = MediatorLiveData<Result<List<StoreData>>>()
-        liveData.addDisposable(getAllStores()) { liveData.value = it }
+        liveData.addDisposable(getAllStores()) { liveData.postValue(it) }
 
         db.addSnapshotListener { snapshot, e ->
-            liveData.addDisposable(getAllStores()) { liveData.value = it }
+            liveData.addDisposable(
+                getAllStores()
+            ) { liveData.postValue(it) }
         }
 
         return liveData
     }
 
-    override fun addStore(storeData: StoreData): Flow<String> = flow {
-        var message = ""
+    override fun addStore(storeData: StoreData): LiveData<String> {
+        val messageLiveData = MutableLiveData<String>()
         db.document(storeData.id).set(storeData)
             .addOnCompleteListener {
-                message = "Add complete"
+                messageLiveData.postValue("Add complete")
             }
             .addOnSuccessListener {
-                Log.d("TTT", "addOnSuccessListener")
-                message = "Add success"
+                messageLiveData.postValue("Add success")
             }
             .addOnFailureListener {
-                Log.d("TTT", "addOnFailureListener")
-                message = "Add failure"
+                messageLiveData.postValue("Add failure")
             }
-        emit(message)
+        return messageLiveData
     }
 
-    override fun updateStore(storeData: StoreData): Flow<String> = flow {
-        var message = ""
-        val docReference: DocumentReference = db.document(storeData.id)
-        docReference.update(
+    override fun updateStore(storeData: StoreData): LiveData<String> {
+        val messageLiveData = MutableLiveData<String>()
+        db.document(storeData.id).update(
             "name", storeData.name,
             "login", storeData.login,
             "password", storeData.password
         ).addOnCompleteListener {
-            message = if (it.isSuccessful) {
-                "Update Store"
-            } else {
-                "Failed"
-            }
+            messageLiveData.postValue("Add complete")
         }
-        emit(message)
+            .addOnSuccessListener {
+                messageLiveData.postValue("Add success")
+            }
+            .addOnFailureListener {
+                messageLiveData.postValue("Add failure")
+            }
+        return messageLiveData
     }
 
-    override fun deleteStore(storeData: StoreData): Flow<String> = flow {
-        var message = ""
-        val docReference: DocumentReference = db.document(storeData.id)
-        docReference.delete().addOnCompleteListener {
-            if (it.isSuccessful) {
-                message = "Delete Store"
-            } else {
-                message = "Failed"
-            }
+    override fun deleteStore(storeData: StoreData): LiveData<String> {
+        val messageLiveData = MutableLiveData<String>()
+        db.document(storeData.id).delete().addOnCompleteListener {
+            messageLiveData.postValue("Delete complete")
         }
-        emit(message)
+            .addOnSuccessListener {
+                messageLiveData.postValue("Delete success")
+            }
+            .addOnFailureListener {
+                messageLiveData.postValue("Delete failure")
+            }
+        return messageLiveData
     }
 }
 

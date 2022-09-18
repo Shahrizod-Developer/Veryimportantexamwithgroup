@@ -54,7 +54,7 @@ class StoresAdapter : ListAdapter<StoreData, StoresAdapter.ViewHolder>(itemCallb
 
 val itemCallback = object : DiffUtil.ItemCallback<StoreData>() {
     override fun areItemsTheSame(oldItem: StoreData, newItem: StoreData) =
-        oldItem == newItem
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: StoreData, newItem: StoreData) =
         oldItem.id == newItem.id

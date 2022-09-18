@@ -35,6 +35,9 @@ class EditScreen : Fragment(R.layout.screen_edit) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewBinding.name.setText(data?.name)
+        viewBinding.login.setText(data?.login)
+        viewBinding.password.setText(data?.password)
         viewBinding.btnEdit.clicks()
             .onEach {
                 val storeData = StoreData(

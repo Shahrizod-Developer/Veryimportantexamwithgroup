@@ -1,11 +1,11 @@
 package uz.gita.veryimportantexamwithgroup.ui.main.viewmodel.impl
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
@@ -18,21 +18,26 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) :
     ViewModel(), MainViewModel {
-    override val messageLiveData: MutableLiveData<String> = MutableLiveData()
+    override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
+    override val getData: MutableLiveData<Result<List<StoreData>>> = MutableLiveData()
 
-    override fun getStores(): LiveData<Result<List<StoreData>>> {
-        return useCase.getAllStores2()
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            messageLiveData.addSource(useCase.getAllStores2()) {
+                getData.postValue(it)
+            }
+        }
     }
 
     override fun deleteStore(storeData: StoreData) {
-        useCase.deleteStore(storeData).onEach {
-            messageLiveData.value = it
+        messageLiveData.addSource(useCase.deleteStore(storeData)) {
+            messageLiveData.postValue(it)
         }
     }
 
     override fun failurMessage(mess: String) {
-        messageLiveData.value = mess
+        messageLiveData.postValue(mess)
     }
 
     override fun openAdd() {

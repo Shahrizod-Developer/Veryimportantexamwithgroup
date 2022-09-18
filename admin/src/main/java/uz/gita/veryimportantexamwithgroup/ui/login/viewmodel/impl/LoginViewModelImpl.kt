@@ -23,7 +23,7 @@ class LoginViewModelImpl @Inject constructor(private val navigator: Navigator) :
     override val isResume = MutableStateFlow(false)
 
     override fun signIn(login: String, password: String) {
-        if (login.trim().isEmpty() && password.trim().isEmpty()) {
+        if (login.trim().isEmpty() || password.trim().isEmpty()) {
             messageLiveData.value = "Fill in all fields"
         } else {
             if (login == "admin" && password == "12345") {

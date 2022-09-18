@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,10 +36,11 @@ class MainScreen : Fragment(R.layout.screen_main) {
         super.onCreate(savedInstanceState)
 
         viewModel.messageLiveData.observe(this, messageObserver)
-        viewModel.getStores().observe(this, getObserver)
+        viewModel.getData.observe(this, getObserver)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewBinding.listStore.adapter = adapter
         viewBinding.addStore.clicks()
             .onEach { viewModel.openAdd() }
             .launchIn(lifecycleScope)

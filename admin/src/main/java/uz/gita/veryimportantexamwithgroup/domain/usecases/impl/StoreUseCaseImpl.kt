@@ -11,9 +11,9 @@ class StoreUseCaseImpl @Inject constructor(private val storeRepository: StoreRep
 
     override fun getAllStores2(): LiveData<Result<List<StoreData>>> = storeRepository.getAllStores2()
 
-    override fun addStore(storeData: StoreData): Flow<String> = storeRepository.addStore(storeData)
+    override fun addStore(storeData: StoreData): LiveData<String> = storeRepository.addStore(storeData)
 
-    override fun updateStore(storeData: StoreData): Flow<String> = storeRepository.updateStore(storeData)
+    override fun updateStore(storeData: StoreData): LiveData<String> = storeRepository.updateStore(storeData)
 
-    override fun deleteStore(storeData: StoreData): Flow<String> = storeRepository.deleteStore(storeData)
+    override fun deleteStore(storeData: StoreData): LiveData<String> = storeRepository.deleteStore(storeData)
 }

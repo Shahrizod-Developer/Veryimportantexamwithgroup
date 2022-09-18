@@ -1,5 +1,6 @@
 package uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel.impl
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,16 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) : ViewModel(), EditViewModel {
-    override val messageLiveData: MutableLiveData<String> = MutableLiveData()
+    override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
 
     override fun updateStore(storeData: StoreData) {
         if (checkStore(storeData)) {
-            useCase.updateStore(storeData)
-                .onEach {
-                    messageLiveData.value = it
-                    navigateUp()
-                }.launchIn(viewModelScope)
+            messageLiveData.addSource(useCase.updateStore(storeData)){
+                messageLiveData.postValue(it)
+                navigateUp()
+            }
         }
     }
 
@@ -35,7 +35,7 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
     }
 
     private fun checkStore(storeData: StoreData): Boolean {
-        return if (storeData.name.trim().isEmpty() && storeData.login.trim().isEmpty() && storeData.password.trim().isEmpty()) {
+        return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim().isEmpty()) {
             messageLiveData.value = "Fill in all fields!"
             false
         } else {

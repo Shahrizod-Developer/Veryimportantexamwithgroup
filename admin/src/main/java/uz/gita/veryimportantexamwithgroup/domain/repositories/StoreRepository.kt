@@ -6,13 +6,13 @@ import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 
 interface StoreRepository {
 
-    fun getAllStores(): LiveData<Result<List<StoreData>>>
+     fun getAllStores(): LiveData<Result<List<StoreData>>>
 
     fun getAllStores2(): LiveData<Result<List<StoreData>>>
 
-    fun addStore(storeData: StoreData): Flow<String>
+    fun addStore(storeData: StoreData): LiveData<String>
 
-    fun updateStore(storeData: StoreData): Flow<String>
+    fun updateStore(storeData: StoreData): LiveData<String>
 
-    fun deleteStore(storeData: StoreData): Flow<String>
+    fun deleteStore(storeData: StoreData): LiveData<String>
 }

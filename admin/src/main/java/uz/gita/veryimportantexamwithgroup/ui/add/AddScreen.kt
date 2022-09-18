@@ -17,6 +17,7 @@ import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.databinding.ScreenAddBinding
 import uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.AddViewModel
 import uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.impl.AddViewModelImpl
+import java.util.*
 
 @AndroidEntryPoint
 class AddScreen : Fragment(R.layout.screen_add) {
@@ -32,12 +33,15 @@ class AddScreen : Fragment(R.layout.screen_add) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.btnAdd.clicks()
-            .onEach { val storeData = StoreData(
-                name = viewBinding.name.text.toString(),
-                login = viewBinding.login.text.toString(),
-                password = viewBinding.password.text.toString()
-            )
-                viewModel.addStore(storeData) }
+            .onEach {
+                val storeData = StoreData(
+                    id = UUID.randomUUID().toString(),
+                    name = viewBinding.name.text.toString(),
+                    login = viewBinding.login.text.toString(),
+                    password = viewBinding.password.text.toString()
+                )
+                viewModel.addStore(storeData)
+            }
             .launchIn(lifecycleScope)
     }
 
