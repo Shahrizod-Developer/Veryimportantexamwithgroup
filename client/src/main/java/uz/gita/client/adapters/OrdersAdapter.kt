@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.gita.client.databinding.ItemOrderBinding
+import uz.gita.core_data.data.OrderData
 
 class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.VH>() {
     private val oldList: ArrayList<OrderData> = arrayListOf()
@@ -19,10 +20,10 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.VH>() {
 
         fun bind() {
             val item = oldList[absoluteAdapterPosition]
-            itemBinding.tvItemCount.text = item
-            itemBinding.tvItemName.text = item
-            itemBinding.orderStatus.text = item
-            itemBinding.tvItemPrice.text = item
+//            itemBinding.tvItemCount.text = item
+//            itemBinding.tvItemName.text = item
+//            itemBinding.orderStatus.text = item
+//            itemBinding.tvItemPrice.text = item
         }
 
     }
