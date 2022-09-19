@@ -16,6 +16,7 @@ import uz.gita.veryimportantexamwithgroup.domain.usecases.StoreUseCase
 import uz.gita.veryimportantexamwithgroup.navigation.Navigator
 import uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.AddViewModel
 import uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel.EditViewModel
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +24,16 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
     ViewModel(), EditViewModel {
     override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
+    private var storeList: ArrayList<StoreData> = ArrayList()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCase.getStores().collect {
+                storeList.clear()
+                storeList.addAll(it)
+            }
+        }
+    }
 
     override fun updateStore(storeData: StoreData) {
         if (checkStore(storeData)) {
@@ -38,13 +49,24 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
     }
 
     private fun checkStore(storeData: StoreData): Boolean {
-        return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
+        if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
                 .isEmpty()
         ) {
             messageLiveData.value = "Barcha maydonlarni to'ldiring!"
-            false
+            return false
         } else {
-            true
+            for (store in storeList) {
+                if (store.id == storeData.id) continue
+                if (storeData.name.lowercase(Locale.ROOT) == store.name.lowercase(Locale.ROOT)) {
+                    messageLiveData.postValue("Bu nomdagi do'kon mavjud!")
+                    return false
+                }
+                if (storeData.login.lowercase(Locale.ROOT) == store.login.lowercase(Locale.ROOT)) {
+                    messageLiveData.postValue("Bunday login mavjud. Boshqa login kiriting!")
+                    return false
+                }
+            }
+            return true
         }
     }
 }

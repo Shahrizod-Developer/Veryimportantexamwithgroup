@@ -50,11 +50,11 @@ class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, pr
     }
 
     private fun checkStore(storeData: StoreData): Boolean {
-        return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
+        if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
                 .isEmpty()
         ) {
             messageLiveData.postValue("Barcha maydonlarni to'ldiring!")
-            false
+            return false
         } else {
             for (store in storeList) {
                 if (storeData.name.lowercase(Locale.ROOT) == store.name.lowercase(Locale.ROOT)) {
