@@ -6,9 +6,11 @@ import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 
 interface StoreRepository {
 
-     fun getAllStores(): LiveData<Result<List<StoreData>>>
+//     fun getAllStores(): LiveData<Result<List<StoreData>>>
 
-    fun getAllStores2(): LiveData<Result<List<StoreData>>>
+     fun getStores(): Flow<List<StoreData>>
+
+//    fun getAllStores2(): LiveData<Result<List<StoreData>>>
 
     fun addStore(storeData: StoreData): LiveData<String>
 

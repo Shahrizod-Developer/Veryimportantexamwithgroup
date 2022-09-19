@@ -9,7 +9,8 @@ import javax.inject.Inject
 
 class StoreUseCaseImpl @Inject constructor(private val storeRepository: StoreRepository) : StoreUseCase {
 
-    override fun getAllStores2(): LiveData<Result<List<StoreData>>> = storeRepository.getAllStores2()
+//    override fun getAllStores2(): LiveData<Result<List<StoreData>>> = storeRepository.getAllStores2()
+    override fun getStores(): Flow<List<StoreData>> = storeRepository.getStores()
 
     override fun addStore(storeData: StoreData): LiveData<String> = storeRepository.addStore(storeData)
 

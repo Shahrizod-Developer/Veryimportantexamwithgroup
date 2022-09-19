@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -20,11 +21,14 @@ class MainViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
     ViewModel(), MainViewModel {
     override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
-    override val getData: MutableLiveData<Result<List<StoreData>>> = MutableLiveData()
+    override val getData: MutableLiveData<List<StoreData>> = MutableLiveData()
+    override val progressLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
+        progressLiveData.postValue(false)
         viewModelScope.launch(Dispatchers.IO) {
-            messageLiveData.addSource(useCase.getAllStores2()) {
+            useCase.getStores().collect {
+                progressLiveData.postValue(true)
                 getData.postValue(it)
             }
         }

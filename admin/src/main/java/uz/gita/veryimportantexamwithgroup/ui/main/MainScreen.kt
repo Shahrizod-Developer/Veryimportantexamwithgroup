@@ -42,6 +42,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
         super.onCreate(savedInstanceState)
         viewModel.messageLiveData.observe(this, messageObserver)
         viewModel.getData.observe(this, getObserver)
+        viewModel.progressLiveData.observe(this, progressObserver)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +51,9 @@ class MainScreen : Fragment(R.layout.screen_main) {
         viewBinding.addStore.clicks()
             .onEach { viewModel.openAdd() }
             .launchIn(lifecycleScope)
+
         adapter.setItemEditListener { result -> flowOf(1).onEach { viewModel.openEdit(result) }.launchIn(lifecycleScope) }
+
         adapter.setItemDeleteListener { store ->
             val builder = AlertDialog.Builder(requireContext())
             val binding = ScreenDialogBinding.inflate(layoutInflater)
@@ -80,15 +83,20 @@ class MainScreen : Fragment(R.layout.screen_main) {
             .show()
     }
 
-    private val getObserver = Observer<Result<List<StoreData>>> { result ->
-        when {
-            result.isFailure -> {
-                viewModel.failurMessage("Yuklashda xatolik yuz berdi. Qurilma internetga ulanganligini tekshiring!")
-            }
-            result.isSuccess -> {
-                adapter.submitList(result.getOrNull())
-            }
+    private val progressObserver = Observer<Boolean> {
+        if (it) {
+            viewBinding.loading.visibility = View.GONE
+        } else {
+            viewBinding.loading.visibility = View.VISIBLE
         }
+    }
 
+    private val getObserver = Observer<List<StoreData>> {
+        if (it.isEmpty()) {
+            viewBinding.placeHolder.visibility = View.VISIBLE
+        } else {
+            viewBinding.placeHolder.visibility = View.GONE
+        }
+        adapter.submitList(it)
     }
 }

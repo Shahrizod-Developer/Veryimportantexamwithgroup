@@ -9,7 +9,8 @@ interface MainViewModel {
 
     val messageLiveData: LiveData<String>
     val isResume: Flow<Boolean>
-    val getData: LiveData<Result<List<StoreData>>>
+    val getData: LiveData<List<StoreData>>
+    val progressLiveData: LiveData<Boolean>
 
     fun deleteStore(storeData: StoreData)
 

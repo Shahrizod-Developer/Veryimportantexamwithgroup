@@ -6,7 +6,8 @@ import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 
 interface StoreUseCase {
 
-    fun getAllStores2(): LiveData<Result<List<StoreData>>>
+//    fun getAllStores2(): LiveData<Result<List<StoreData>>>
+    fun getStores(): Flow<List<StoreData>>
 
     fun addStore(storeData: StoreData): LiveData<String>
 

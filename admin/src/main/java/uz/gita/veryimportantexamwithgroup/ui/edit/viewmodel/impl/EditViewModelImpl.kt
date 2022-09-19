@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -17,13 +19,14 @@ import uz.gita.veryimportantexamwithgroup.ui.edit.viewmodel.EditViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) : ViewModel(), EditViewModel {
+class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) :
+    ViewModel(), EditViewModel {
     override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
 
     override fun updateStore(storeData: StoreData) {
         if (checkStore(storeData)) {
-            messageLiveData.addSource(useCase.updateStore(storeData)){
+            messageLiveData.addSource(useCase.updateStore(storeData)) {
                 messageLiveData.postValue(it)
                 navigateUp()
             }
@@ -35,8 +38,10 @@ class EditViewModelImpl @Inject constructor(private val useCase: StoreUseCase, p
     }
 
     private fun checkStore(storeData: StoreData): Boolean {
-        return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim().isEmpty()) {
-            messageLiveData.value = "Fill in all fields!"
+        return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
+                .isEmpty()
+        ) {
+            messageLiveData.value = "Barcha maydonlarni to'ldiring!"
             false
         } else {
             true

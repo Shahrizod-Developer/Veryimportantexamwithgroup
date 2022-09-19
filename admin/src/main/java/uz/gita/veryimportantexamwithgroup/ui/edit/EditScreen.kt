@@ -46,7 +46,11 @@ class EditScreen : Fragment(R.layout.screen_edit) {
                     login = viewBinding.login.text.toString(),
                     password = viewBinding.password.text.toString()
                 )
-                viewModel.updateStore(storeData)
+                if (storeData.name == data?.name && storeData.login == data?.login && storeData.password == data?.password) {
+                    viewModel.navigateUp()
+                } else {
+                    viewModel.updateStore(storeData)
+                }
             }.launchIn(lifecycleScope)
     }
 

@@ -1,18 +1,18 @@
 package uz.gita.veryimportantexamwithgroup.domain.repositories.impl
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uz.gita.veryimportantexamwithgroup.Mapper
+import uz.gita.veryimportantexamwithgroup.Mapper.toStore
 import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.domain.repositories.StoreRepository
 import javax.inject.Inject
@@ -21,33 +21,45 @@ class StoreRepositoryImpl @Inject constructor(private val db: CollectionReferenc
 
     private val coroutine = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
-    override fun getAllStores(): LiveData<Result<List<StoreData>>> {
-        val liveData = MutableLiveData<Result<List<StoreData>>>()
+//    override fun getAllStores(): LiveData<Result<List<StoreData>>> {
+//        val liveData = MutableLiveData<Result<List<StoreData>>>()
+//
+//        coroutine.launch(Dispatchers.IO) {
+//            db.get()
+//                .addOnSuccessListener {
+//                    val ls = it.documents.map { item -> Mapper.run { item.toStore() } }
+//                    liveData.postValue(Result.success(ls))
+//                }
+//                .addOnFailureListener { liveData.postValue(Result.failure(it)) }
+//        }
+//
+//        return liveData
+//    }
 
-        coroutine.launch(Dispatchers.IO) {
-            db.get()
-                .addOnSuccessListener {
-                    val ls = it.documents.map { item -> Mapper.run { item.tostore() } }
-                    liveData.postValue(Result.success(ls))
-                }
-                .addOnFailureListener { liveData.postValue(Result.failure(it)) }
+    override fun getStores(): Flow<List<StoreData>> = callbackFlow {
+        val subscriber = db.addSnapshotListener { value, error ->
+            val list = value?.documents?.map {
+                it.toStore()
+            }
+            trySend(list ?: emptyList())
         }
-
-        return liveData
+        awaitClose {
+            subscriber.remove()
+        }
     }
 
-    override fun getAllStores2(): LiveData<Result<List<StoreData>>> {
-        val liveData = MediatorLiveData<Result<List<StoreData>>>()
-        liveData.addDisposable(getAllStores()) { liveData.postValue(it) }
-
-        db.addSnapshotListener { snapshot, e ->
-            liveData.addDisposable(
-                getAllStores()
-            ) { liveData.postValue(it) }
-        }
-
-        return liveData
-    }
+//    override fun getAllStores2(): LiveData<Result<List<StoreData>>> {
+//        val liveData = MediatorLiveData<Result<List<StoreData>>>()
+//        liveData.addDisposable(getAllStores()) { liveData.postValue(it) }
+//
+//        db.addSnapshotListener { snapshot, e ->
+//            liveData.addDisposable(
+//                getAllStores()
+//            ) { liveData.postValue(it) }
+//        }
+//
+//        return liveData
+//    }
 
     override fun addStore(storeData: StoreData): LiveData<String> {
         val messageLiveData = MutableLiveData<String>()

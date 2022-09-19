@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.launchIn
@@ -15,13 +16,25 @@ import uz.gita.veryimportantexamwithgroup.data.models.StoreData
 import uz.gita.veryimportantexamwithgroup.domain.usecases.StoreUseCase
 import uz.gita.veryimportantexamwithgroup.navigation.Navigator
 import uz.gita.veryimportantexamwithgroup.ui.add.viewmodel.AddViewModel
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @HiltViewModel
 class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, private val navigator: Navigator) :
     ViewModel(), AddViewModel {
     override val messageLiveData: MediatorLiveData<String> = MediatorLiveData()
     override val isResume = MutableStateFlow(false)
+    private var storeList: ArrayList<StoreData> = ArrayList()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCase.getStores().collect {
+                storeList.clear()
+                storeList.addAll(it)
+            }
+        }
+    }
 
     override fun addStore(storeData: StoreData) {
         if (checkStore(storeData)) {
@@ -29,7 +42,6 @@ class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, pr
                 messageLiveData.postValue(it)
                 add()
             }
-
         }
     }
 
@@ -41,10 +53,20 @@ class AddViewModelImpl @Inject constructor(private val useCase: StoreUseCase, pr
         return if (storeData.name.trim().isEmpty() || storeData.login.trim().isEmpty() || storeData.password.trim()
                 .isEmpty()
         ) {
-            messageLiveData.postValue("Fill in all fields!")
+            messageLiveData.postValue("Barcha maydonlarni to'ldiring!")
             false
         } else {
-            true
+            for (store in storeList) {
+                if (storeData.name.lowercase(Locale.ROOT) == store.name.lowercase(Locale.ROOT)) {
+                    messageLiveData.postValue("Bu nomdagi do'kon mavjud!")
+                    return false
+                }
+                if (storeData.login.lowercase(Locale.ROOT) == store.login.lowercase(Locale.ROOT)) {
+                    messageLiveData.postValue("Bunday login mavjud. Boshqa login kiriting!")
+                    return false
+                }
+            }
+            return true
         }
     }
 }

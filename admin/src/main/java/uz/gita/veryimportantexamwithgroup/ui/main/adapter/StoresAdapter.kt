@@ -1,5 +1,6 @@
 package uz.gita.veryimportantexamwithgroup.ui.main.adapter
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -28,10 +29,11 @@ class StoresAdapter : ListAdapter<StoreData, StoresAdapter.ViewHolder>(itemCallb
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun onBind() {
             binding.name.text = getItem(absoluteAdapterPosition).name
-            binding.login.text = getItem(absoluteAdapterPosition).login
-            binding.password.text = getItem(absoluteAdapterPosition).password
+            binding.login.text = "Login :  " + getItem(absoluteAdapterPosition).login
+            binding.password.text = "Parol  :  " + getItem(absoluteAdapterPosition).password
         }
     }
 
